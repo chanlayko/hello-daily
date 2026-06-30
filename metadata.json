@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Daily Expense Tracker",
+  "description": "An elegant, completely offline Material 3 Daily Expense Tracker with budgets, visual analytics, categories, and backup/restore features.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
