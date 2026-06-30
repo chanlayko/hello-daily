@@ -174,7 +174,8 @@ fun SettingsScreen(
                 fontWeight = FontWeight.Bold
             )
 
-            val isLoggedIn = viewModel.isSupabaseLoggedIn()
+            val supabaseAccessToken by viewModel.supabaseAccessToken.collectAsState()
+            val isLoggedIn = supabaseAccessToken.isNotEmpty()
             val userEmail by viewModel.supabaseUserEmail.collectAsState()
             val isSyncing by viewModel.supabaseIsSyncing.collectAsState()
 

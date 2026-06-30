@@ -53,8 +53,9 @@ fun DashboardScreen(
     val shoppingItems by viewModel.shoppingItems.collectAsState()
     val supabaseUserEmail by viewModel.supabaseUserEmail.collectAsState()
     val supabaseIsSyncing by viewModel.supabaseIsSyncing.collectAsState()
+    val supabaseAccessToken by viewModel.supabaseAccessToken.collectAsState()
     val lang by viewModel.languageMode.collectAsState()
-    val isLoggedIn = viewModel.isSupabaseLoggedIn()
+    val isLoggedIn = supabaseAccessToken.isNotEmpty()
     val activeShoppingCount = remember(shoppingItems) { shoppingItems.count { !it.shoppingItem.isBought } }
 
     var showAddDialog by remember { mutableStateOf(false) }
@@ -116,9 +117,12 @@ fun DashboardScreen(
                         }
 
                         val displayName = if (isLoggedIn && supabaseUserEmail.isNotBlank()) {
-                            supabaseUserEmail.substringBefore("@")
+                            val prefix = supabaseUserEmail.substringBefore("@")
+                            prefix.split(".", "_", "-").joinToString(" ") { part ->
+                                part.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                            }
                         } else {
-                            "John Doe"
+                            LanguageHelper.translate("Guest", lang)
                         }
                         val firstLetter = displayName.firstOrNull()?.uppercase() ?: "J"
 

@@ -44,7 +44,8 @@ fun LoginScreen(
     onBypass: () -> Unit
 ) {
     val context = LocalContext.current
-    val isLoggedIn = viewModel.isSupabaseLoggedIn()
+    val supabaseAccessToken by viewModel.supabaseAccessToken.collectAsState()
+    val isLoggedIn = supabaseAccessToken.isNotEmpty()
 
     // Auto-navigate to dashboard if already logged in
     LaunchedEffect(isLoggedIn) {

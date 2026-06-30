@@ -98,6 +98,10 @@ object LanguageHelper {
             "English" to "Welcome back,",
             "Myanmar" to "မင်္ဂလာပါ၊"
         ),
+        "Guest" to mapOf(
+            "English" to "Guest User",
+            "Myanmar" to "ဧည့်သည်"
+        ),
         "Total Monthly Budget" to mapOf(
             "English" to "Total Monthly Budget",
             "Myanmar" to "လစဉ် စုစုပေါင်း ဘတ်ဂျက်"
@@ -301,6 +305,6 @@ object LanguageHelper {
     )
 
     fun translate(key: String, language: String): String {
-        return translations[key]?.get("English") ?: key
+        return translations[key]?.get(language) ?: translations[key]?.get("English") ?: key
     }
 }
