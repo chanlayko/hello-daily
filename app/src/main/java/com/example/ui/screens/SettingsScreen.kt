@@ -30,7 +30,8 @@ import com.example.viewmodel.ExpenseTrackerViewModel
 fun SettingsScreen(
     viewModel: ExpenseTrackerViewModel,
     expenses: List<ExpenseWithCategory>,
-    onNavigateToCategories: () -> Unit
+    onNavigateToCategories: () -> Unit,
+    onLogout: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
@@ -244,7 +245,10 @@ fun SettingsScreen(
                                 }
 
                                 OutlinedButton(
-                                    onClick = { viewModel.supabaseSignOut() },
+                                    onClick = { 
+                                        viewModel.supabaseSignOut() 
+                                        onLogout()
+                                    },
                                     modifier = Modifier.weight(1f),
                                     shape = RoundedCornerShape(10.dp)
                                 ) {

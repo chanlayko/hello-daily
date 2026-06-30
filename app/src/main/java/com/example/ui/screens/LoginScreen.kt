@@ -104,14 +104,14 @@ fun LoginScreen(
 
             // Burmese and English Title Header
             Text(
-                text = "မိသားစု သုံးစွဲမှုမှတ်တမ်း",
+                text = LanguageHelper.translate("Family Cloud Expense Sync", lang),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = "Family Cloud Expense Sync",
+                text = LanguageHelper.translate("Synchronize your budget & expenses", lang),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 4.dp),
@@ -124,7 +124,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("အီးမေးလ်လိပ်စာ (Email)") },
+                label = { Text(LanguageHelper.translate("Email Address", lang)) },
                 placeholder = { Text("example@gmail.com") },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Email, contentDescription = "Email")
@@ -143,7 +143,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("စကားဝှက် (Password)") },
+                label = { Text(LanguageHelper.translate("Password", lang)) },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = "Password")
                 },
@@ -168,7 +168,7 @@ fun LoginScreen(
             Button(
                 onClick = {
                     if (email.isBlank() || password.isBlank()) {
-                        Toast.makeText(context, "Email နှင့် Password ထည့်သွင်းပေးပါ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, LanguageHelper.translate("Email and password cannot be empty", lang), Toast.LENGTH_SHORT).show()
                         return@Button
                     }
                     isLoading = true
@@ -195,7 +195,7 @@ fun LoginScreen(
                     )
                 } else {
                     Text(
-                        text = "လော့ဂ်အင်ဝင်မည် (Login)",
+                        text = LanguageHelper.translate("Login", lang),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -208,7 +208,7 @@ fun LoginScreen(
             OutlinedButton(
                 onClick = {
                     if (email.isBlank() || password.isBlank()) {
-                        Toast.makeText(context, "Email နှင့် Password ထည့်သွင်းပေးပါ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, LanguageHelper.translate("Email and password cannot be empty", lang), Toast.LENGTH_SHORT).show()
                         return@OutlinedButton
                     }
                     isLoading = true
@@ -225,61 +225,10 @@ fun LoginScreen(
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text(
-                    text = "အကောင့်အသစ်ဖွင့်မည် (Register)",
+                    text = LanguageHelper.translate("Register", lang),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Auto-Create 2 Demo Accounts Button
-            var isCreatingDemo by remember { mutableStateOf(false) }
-            TextButton(
-                onClick = {
-                    isCreatingDemo = true
-                    Toast.makeText(context, "ပထမအကောင့် (demo1@gmail.com) ကို စတင်ဖန်တီးနေပါသည်...", Toast.LENGTH_SHORT).show()
-                    viewModel.supabaseSignUp("demo1@gmail.com", "password123") { success1, msg1 ->
-                        if (success1) {
-                            Toast.makeText(context, "ပထမအကောင့် အောင်မြင်စွာ ဖန်တီးပြီးပါပြီ။ ဒုတိယအကောင့် (demo2@gmail.com) ကို ဆက်လက်ဖန်တီးနေပါသည်...", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(context, "ပထမအကောင့် ဖန်တီးခြင်း: $msg1", Toast.LENGTH_SHORT).show()
-                        }
-                        
-                        viewModel.supabaseSignUp("demo2@gmail.com", "password123") { success2, msg2 ->
-                            isCreatingDemo = false
-                            if (success2) {
-                                Toast.makeText(context, "စမ်းသပ်ရန် အကောင့် ၂ခုစလုံးကို Supabase တွင် အောင်မြင်စွာ ထည့်သွင်းပြီးပါပြီ။", Toast.LENGTH_LONG).show()
-                            } else {
-                                Toast.makeText(context, "ဒုတိယအကောင့် ဖန်တီးခြင်း: $msg2", Toast.LENGTH_SHORT).show()
-                            }
-                            email = "demo1@gmail.com"
-                            password = "password123"
-                        }
-                    }
-                },
-                enabled = !isLoading && !isCreatingDemo,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("login_auto_create_demo_button")
-            ) {
-                if (isCreatingDemo) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
-                        strokeWidth = 2.dp
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "အကောင့်များ ဖန်တီးနေသည်...",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                } else {
-                    Text(
-                        text = "✨ စမ်းသပ်ရန် အကောင့် ၂ခု အလိုအလျောက်ဖွင့်မည် (Auto-Create 2 Demo Accounts)",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -294,7 +243,7 @@ fun LoginScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f)
                 )
                 Text(
-                    text = "သို့မဟုတ်",
+                    text = LanguageHelper.translate("OR", lang),
                     modifier = Modifier.padding(horizontal = 16.dp),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -315,7 +264,7 @@ fun LoginScreen(
                     .testTag("login_bypass_button")
             ) {
                 Text(
-                    text = "အော့ဖ်လိုင်း ဆက်လက်အသုံးပြုမည် (Continue Offline)",
+                    text = LanguageHelper.translate("Continue Offline", lang),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary

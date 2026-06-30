@@ -23,6 +23,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.remember
 import kotlinx.coroutines.launch
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
@@ -107,6 +108,12 @@ fun ExpenseTrackerApp(viewModel: ExpenseTrackerViewModel) {
             onNavigateToCategories = {
               scope.launch { drawerState.close() }
               navController.navigate("categories")
+            },
+            onLogout = {
+              scope.launch { drawerState.close() }
+              navController.navigate("login") {
+                popUpTo(0) { inclusive = true }
+              }
             }
           )
         }
@@ -142,9 +149,10 @@ fun ExpenseTrackerApp(viewModel: ExpenseTrackerViewModel) {
         }
       }
     ) { innerPadding ->
+      val startDestination = remember { if (viewModel.isSupabaseLoggedIn()) "dashboard" else "login" }
       NavHost(
         navController = navController,
-        startDestination = "login",
+        startDestination = startDestination,
         modifier = Modifier.padding(innerPadding)
       ) {
         composable("login") {
@@ -214,7 +222,12 @@ fun ExpenseTrackerApp(viewModel: ExpenseTrackerViewModel) {
         SettingsScreen(
           viewModel = viewModel,
           expenses = filteredExpenses,
-          onNavigateToCategories = { navController.navigate("categories") }
+          onNavigateToCategories = { navController.navigate("categories") },
+          onLogout = {
+            navController.navigate("login") {
+              popUpTo(0) { inclusive = true }
+            }
+          }
         )
       }
 

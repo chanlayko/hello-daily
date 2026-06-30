@@ -301,6 +301,50 @@ object LanguageHelper {
         "Weekly Spending Trend" to mapOf(
             "English" to "Weekly Spending Trend",
             "Myanmar" to "အပတ်စဉ် အသုံးစရိတ် လားရာပုံစံ"
+        ),
+        "Family Cloud Expense Sync" to mapOf(
+            "English" to "Family Cloud Expense Sync",
+            "Myanmar" to "မိသားစု သုံးစွဲမှုမှတ်တမ်း"
+        ),
+        "Synchronize your budget & expenses" to mapOf(
+            "English" to "Synchronize your budget & expenses",
+            "Myanmar" to "မိသားစုသုံးငွေများကို တပြိုင်တည်း သိမ်းဆည်းရန်"
+        ),
+        "Email Address" to mapOf(
+            "English" to "Email Address",
+            "Myanmar" to "အီးမေးလ်လိပ်စာ"
+        ),
+        "Password" to mapOf(
+            "English" to "Password",
+            "Myanmar" to "စကားဝှက်"
+        ),
+        "Login" to mapOf(
+            "English" to "Login",
+            "Myanmar" to "လော့ဂ်အင်ဝင်မည်"
+        ),
+        "Register" to mapOf(
+            "English" to "Register",
+            "Myanmar" to "အကောင့်အသစ်ဖွင့်မည်"
+        ),
+        "Auto-Create 2 Demo Accounts" to mapOf(
+            "English" to "✨ Auto-Create 2 Demo Accounts",
+            "Myanmar" to "✨ စမ်းသပ်ရန် အကောင့် ၂ခု အလိုအလျောက်ဖွင့်မည်"
+        ),
+        "Creating demo accounts..." to mapOf(
+            "English" to "Creating demo accounts...",
+            "Myanmar" to "အကောင့်များ ဖန်တီးနေသည်..."
+        ),
+        "OR" to mapOf(
+            "English" to "OR",
+            "Myanmar" to "သို့မဟုတ်"
+        ),
+        "Continue Offline" to mapOf(
+            "English" to "Continue Offline",
+            "Myanmar" to "အော့ဖ်လိုင်း ဆက်လက်အသုံးပြုမည်"
+        ),
+        "Email and password cannot be empty" to mapOf(
+            "English" to "Email and password cannot be empty",
+            "Myanmar" to "Email နှင့် Password ထည့်သွင်းပေးပါ"
         )
     )
 
